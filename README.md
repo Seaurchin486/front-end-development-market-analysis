@@ -27,5 +27,5 @@
 # 技术栈
 vite搭建
 DataV
-echarts地图控件
+echarts 地图控件
 页面适应性 cacle方案/viewport方案
