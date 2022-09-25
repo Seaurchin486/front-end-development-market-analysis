@@ -4,6 +4,7 @@
 import LeftSwitch from './components/LeftSwitch.vue'
 import MainContent from './components/MainContent.vue'
 import RightSwitch from './components/RightSwitch.vue'
+
 </script>
 
 <template>
