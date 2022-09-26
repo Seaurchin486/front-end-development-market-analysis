@@ -8,16 +8,18 @@ import RightSwitch from './components/RightSwitch.vue'
 </script>
 
 <template>
-  <header style="padding: 1px"><h1>前端开发市场分析图表</h1></header>
-  <aside class="left">
-    <LeftSwitch />
-  </aside>
-  <main>
-    <MainContent />
-  </main>
-  <aside class="right">
-    <RightSwitch />
-  </aside>
+  <dv-full-screen-container>
+    <header style="padding: 1px"><h1>前端开发市场分析图表</h1></header>
+    <aside class="left">
+      <LeftSwitch />
+    </aside>
+    <main>
+      <MainContent />
+    </main>
+    <aside class="right">
+      <RightSwitch />
+    </aside>
+  </dv-full-screen-container>
 </template>
 
 <style scoped>
