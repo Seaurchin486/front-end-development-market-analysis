@@ -93,7 +93,6 @@ console.log(rankStyle.value.width);
 </script>
     
 <template>
-  <p>热门技能</p>
   <div class="content">
     <dv-scroll-ranking-board :config="config" :style="rankStyle" />
   </div>
