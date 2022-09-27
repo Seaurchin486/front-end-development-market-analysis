@@ -1,1 +1,0 @@
-import{_ as s,o,c as _,F as c,p as n,f as p,a as t}from"./index.6a32c76a.js";const a=e=>(n("data-v-0a9cba29"),e=e(),p(),e),r=a(()=>t("p",null,"\u5730\u533A\u5206\u5E03",-1)),i=a(()=>t("div",{class:"content"}," \u5730\u56FE ",-1)),d={__name:"AreaDistribution",setup(e){return(u,l)=>(o(),_(c,null,[r,i],64))}},m=s(d,[["__scopeId","data-v-0a9cba29"]]);export{m as default};
