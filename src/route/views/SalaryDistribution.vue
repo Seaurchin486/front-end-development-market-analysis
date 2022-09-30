@@ -1,10 +1,34 @@
 <script setup>
 import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
-// 目标是做出固定格式的表格
+const props = defineProps({
+  date: {
+    type: String,
+    require: true,
+  },
+});
+
+const store = useStore();
+const route = useRoute();
+const areas = store.state.data[route.params.city][props.date].areas;
+
+let mainData = Array(30).fill(0)
+Object.values(areas).forEach(item => {
+  Object.entries(item).forEach(inner => {
+    mainData[inner[0]] += inner[1]
+  })
+})
 // 一个总表
-// 地区分表 （还要从给的数据中获取并渲染）
 const mainOption = ref({
+  title: {
+    text: "全市薪资分布",
+    x: "center",
+    textStyle: {
+      color: "GhostWhite",
+    },
+  },
   xAxis: {
     type: "category",
     data: [
@@ -16,18 +40,24 @@ const mainOption = ref({
   series: [
     {
       type: "bar",
-      data: [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-      ],
+      data: mainData,
     },
   ],
 });
 
-let areaOptions = ref([
-  {
+// 地区分表 （还要从给的数据中获取并渲染）
+let areaOptions = Object.keys(areas).map(item => {
+  let areaData = Array(30).fill(0)
+  Object.entries(areas[item]).forEach(([key, value]) => {
+    areaData[key] = value
+  })
+  return {
     title: {
-      text: "张三",
+      text: item,
+      x: "center",
+      textStyle: {
+        color: "GhostWhite",
+      },
     },
     xAxis: {
       type: "category",
@@ -40,44 +70,18 @@ let areaOptions = ref([
     series: [
       {
         type: "bar",
-        data: [
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-          21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-        ],
+        data: areaData,
       },
     ],
-  },
-  {
-    title: {
-      text: "李四",
-    },
-    xAxis: {
-      type: "category",
-      data: [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-      ],
-    },
-    yAxis: {},
-    series: [
-      {
-        type: "bar",
-        data: [
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-          21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-        ],
-      },
-    ],
-  },
-]);
+  }
+})
 </script>
     
 <template>
-  <p>薪资分布</p>
   <div class="content">
     <v-echart :option="mainOption" />
     <div class="area-chart" v-for="key in areaOptions.length" :key="key">
-      <v-echart :option="areaOptions[key-1]" />
+      <v-echart :option="areaOptions[key - 1]" />
     </div>
   </div>
 </template>
