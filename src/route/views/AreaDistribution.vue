@@ -9,20 +9,12 @@ let option = {
   visualMap: {
     left: "right",
     min: 0,
-    max: 100,
+    max: 50,
     inRange: {
       color: [
-        "#313695",
-        "#4575b4",
-        "#74add1",
-        "#abd9e9",
         "#e0f3f8",
-        "#ffffbf",
-        "#fee090",
         "#fdae61",
         "#f46d43",
-        "#d73027",
-        "#a50026",
       ],
     },
   },
@@ -35,11 +27,16 @@ let option = {
         normal: {
           label: {
             show: true,
-            color: "#eaeaea",
+            color: 'black',
+            fontStyle: 'bold',
+            textShadowColor: '#fff',
+            textShadowBlur: 2,
+            textShadowOffsetX: 1,
+            textShadowOffsetY: 1,
           },
           borderWidth: 1, //边际线大小
-          borderColor: "#F5F5F5", //边界线颜色
-          areaColor: "#1F54FF", //默认区域颜色
+          borderColor: "#1737AD", //边界线颜色
+          areaColor: "#e0f3f8", //默认区域颜色
         },
         emphasis: {
           label: {
@@ -48,7 +45,14 @@ let option = {
         },
       },
       data: [
-        {name: '上城区', value: 50}
+        {name: '上城区', value: 50},
+        {name: '钱塘区', value: 40},
+        {name: '临平区', value: 30},
+        {name: '萧山区', value: 20},
+        {name: '滨江区', value: 10},
+        {name: '西湖区', value: 20},
+        {name: '拱墅区', value: 30},
+        {name: '余杭区', value: 40},
       ],
     },
   ],
