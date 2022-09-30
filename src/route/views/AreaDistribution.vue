@@ -1,66 +1,73 @@
 <script setup>
-// 从 store 拿数
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+
+const props = defineProps({
+  date: {
+    type: String,
+    require: true,
+  },
+});
+const store = useStore();
+const route = useRoute();
+const areas = store.state.data[route.params.city][props.date].areas;
 // 根据地区计算总的
-// 做图表输出
+let maxCount = 100;
+let areaDatas = Object.entries(areas).map((item) => {
+  let count = Object.values(item[1]).reduce((acc, item) => acc + item);
+  maxCount = Math.max(maxCount, count);
+  return {
+    name: item[0],
+    value: count,
+  };
+});
+
 let option = {
   tooltip: {
     trigger: "item",
+    formatter: '{b}: {c}'
   },
   visualMap: {
     left: "right",
     min: 0,
-    max: 50,
+    max: maxCount + 50,
     inRange: {
-      color: [
-        "#e0f3f8",
-        "#fdae61",
-        "#f46d43",
-      ],
+      color: ["PaleGreen", "yellow", "orangered", "red"],
+      colorAlpha: [0.68],
     },
   },
   series: [
     {
-      name: "hangzhou",
+      name: route.params.city,
       type: "map", //type必须声明为 map 说明该图标为echarts 中map类型
-      map: "hangzhou",
+      map: route.params.city,
+      zoom: 1.25,
+      label: {
+        show: true,
+        color: "#ececec",
+        fontStyle: "bold",
+        fontSize: 16,
+        textShadowColor: "#122334",
+        textShadowBlur: 3,
+        textShadowOffsetX: 1,
+        textShadowOffsetY: 1,
+      },
       itemStyle: {
-        normal: {
-          label: {
-            show: true,
-            color: 'black',
-            fontStyle: 'bold',
-            textShadowColor: '#fff',
-            textShadowBlur: 2,
-            textShadowOffsetX: 1,
-            textShadowOffsetY: 1,
-          },
-          borderWidth: 1, //边际线大小
-          borderColor: "#1737AD", //边界线颜色
-          areaColor: "#e0f3f8", //默认区域颜色
-        },
+        borderWidth: 0.3, //边际线大小
+        borderColor: "#1737AD", //边界线颜色
+        areaColor: "#e0f3f8", //默认区域颜色
         emphasis: {
-          label: {
-            show: true,
-          },
+          show: false,
+          areaColor: null,
         },
       },
-      data: [
-        {name: '上城区', value: 50},
-        {name: '钱塘区', value: 40},
-        {name: '临平区', value: 30},
-        {name: '萧山区', value: 20},
-        {name: '滨江区', value: 10},
-        {name: '西湖区', value: 20},
-        {name: '拱墅区', value: 30},
-        {name: '余杭区', value: 40},
-      ],
+      data: areaDatas,
     },
   ],
 };
 </script>
     
 <template>
-  <p>地区分布</p>
   <div class="content">
     <v-echart :option="option" />
   </div>

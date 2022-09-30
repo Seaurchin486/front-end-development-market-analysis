@@ -37,7 +37,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: url(./assets/bg.png) no-repeat ;
+  background: url(./assets/bg.png) no-repeat;
 }
 
 h1 {
