@@ -36,7 +36,11 @@ use([
 ])
 
 import cherryJSON from './assets/map/hangzhou.json'
-registerMap('hangzhou', cherryJSON) 
+const mapJsons = import.meta.glob('./assets/map/*.json', { eager: true, import: 'default' })
+console.log(mapJsons)
+Object.entries(mapJsons).forEach(([path, jsonValue]) => {
+  registerMap(path.split('/').at(-1).split('.')[0] , jsonValue) 
+})
 
 const app = createApp(App)
 app.component('v-echart', ECharts)

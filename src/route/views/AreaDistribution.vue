@@ -14,7 +14,7 @@ const areas = store.state.data[route.params.city][props.date].areas;
 // 根据地区计算总的
 let maxCount = 100;
 let areaDatas = Object.entries(areas).map((item) => {
-  let count = Object.values(item[1]).reduce((acc, item) => acc + item);
+  let count = Object.values(item[1]).reduce((acc, item) => (acc + item));
   maxCount = Math.max(maxCount, count);
   return {
     name: item[0],
