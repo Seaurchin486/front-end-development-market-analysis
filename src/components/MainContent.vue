@@ -4,7 +4,7 @@
 <template>
   <div>
     <span>选择日期</span>
-    <router-view></router-view>
+    <router-view :date="'20220919'"></router-view>
   </div>
 </template>
 

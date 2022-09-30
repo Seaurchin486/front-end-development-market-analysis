@@ -1,95 +1,31 @@
 <script setup>
 import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+
+const props = defineProps({
+  date: {
+    type: String,
+    require: true
+  }
+})
+const store = useStore();
+const route = useRoute();
+// route.params.city
+let skills = store.state.data[route.params.city][props.date].skills;
 let config = {
-  data: [
-    {
-      name: "新乡",
-      value: 44231,
-    },
-    {
-      name: "南阳",
-      value: 12022,
-    },
-    {
-      name: "西峡",
-      value: 78932,
-    },
-    {
-      name: "驻马店",
-      value: 63411,
-    },
-    {
-      name: "新乡",
-      value: 44231,
-    },
-    {
-      name: "南阳",
-      value: 12022,
-    },
-    {
-      name: "西峡",
-      value: 78932,
-    },
-    {
-      name: "驻马店",
-      value: 63411,
-    },
-    {
-      name: "新乡",
-      value: 44231,
-    },
-    {
-      name: "新乡",
-      value: 44231,
-    },
-    {
-      name: "南阳",
-      value: 12022,
-    },
-    {
-      name: "西峡",
-      value: 78932,
-    },
-    {
-      name: "驻马店",
-      value: 63411,
-    },
-    {
-      name: "新乡",
-      value: 44231,
-    },
-    {
-      name: "南阳",
-      value: 12022,
-    },
-    {
-      name: "西峡",
-      value: 78932,
-    },
-    {
-      name: "驻马店",
-      value: 63411,
-    },
-    {
-      name: "新乡",
-      value: 44231,
-    },
-    {
-      name: "驻马店",
-      value: 63411,
-    },
-    {
-      name: "新乡",
-      value: 44231,
-    },
-  ],
-  rowNum: 20,
-}; // 此数据需要从store中获取
+  data: skills.slice(0, 30).map((item) => {
+    return {
+      name: item[0],
+      value: item[1],
+    };
+  }),
+  rowNum: skills.slice(0, 30).length,
+};
 let rankStyle = ref({
   width: window.innerWidth * 0.8 + "px",
   height: 35 * config.rowNum + "px",
 });
-console.log(rankStyle.value.width);
 </script>
     
 <template>
