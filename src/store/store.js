@@ -29,10 +29,11 @@ export default createStore({
     //     }
     //   }
     // }
+    currentCity: 'hangzhou'
   },
   mutations: { // 定义状态突变方法 commit
-    increment(state) {
-      state.abc++
+    changeCity(state, value) {
+      state.currentCity = value
     }
   }
 })

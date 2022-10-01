@@ -10,11 +10,11 @@ const props = defineProps({
 });
 const store = useStore();
 const route = useRoute();
-const areas = store.state.data[route.params.city][props.date].areas;
+const areas = store.state.data[store.state.currentCity][props.date].areas;
 // 根据地区计算总的
 let maxCount = 100;
 let areaDatas = Object.entries(areas).map((item) => {
-  let count = Object.values(item[1]).reduce((acc, item) => (acc + item));
+  let count = Object.values(item[1]).reduce((acc, item) => acc + item);
   maxCount = Math.max(maxCount, count);
   return {
     name: item[0],
@@ -25,7 +25,7 @@ let areaDatas = Object.entries(areas).map((item) => {
 let option = {
   tooltip: {
     trigger: "item",
-    formatter: '{b}: {c}'
+    formatter: "{b}: {c}",
   },
   visualMap: {
     left: "right",
@@ -38,9 +38,9 @@ let option = {
   },
   series: [
     {
-      name: route.params.city,
+      name: store.state.currentCity,
       type: "map", //type必须声明为 map 说明该图标为echarts 中map类型
-      map: route.params.city,
+      map: store.state.currentCity,
       zoom: 1.25,
       label: {
         show: true,
@@ -56,10 +56,12 @@ let option = {
         borderWidth: 0.3, //边际线大小
         borderColor: "#1737AD", //边界线颜色
         areaColor: "#e0f3f8", //默认区域颜色
-        emphasis: {
+      },
+      emphasis: {
+        itemStyle: {
           show: false,
           areaColor: null,
-        },
+        }
       },
       data: areaDatas,
     },

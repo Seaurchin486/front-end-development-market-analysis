@@ -5,10 +5,10 @@ const AreaDistribution = () => import('./views/AreaDistribution.vue')
 const PopularSkill = () => import('./views/PopularSkill.vue')
 
 const routers = [
-  {path: '/', redirect: '/hefei/SalaryDistribution'},
-  {path: '/:city/SalaryDistribution', component: SalaryDistribution},
-  {path: '/:city/AreaDistribution', component: AreaDistribution},
-  {path: '/:city/PopularSkill', component: PopularSkill}
+  {path: '/', redirect: '/SalaryDistribution'},
+  {path: '/SalaryDistribution', component: SalaryDistribution},
+  {path: '/AreaDistribution', component: AreaDistribution},
+  {path: '/PopularSkill', component: PopularSkill}
 ]
 
 export default createRouter({

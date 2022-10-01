@@ -10,9 +10,8 @@ const props = defineProps({
   }
 })
 const store = useStore();
-const route = useRoute();
-// route.params.city
-let skills = store.state.data[route.params.city][props.date].skills;
+
+let skills = store.state.data[store.state.currentCity][props.date].skills;
 let config = {
   data: skills.slice(0, 30).map((item) => {
     return {

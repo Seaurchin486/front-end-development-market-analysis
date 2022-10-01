@@ -5,6 +5,8 @@ import LeftSwitch from './components/LeftSwitch.vue'
 import MainContent from './components/MainContent.vue'
 import RightSwitch from './components/RightSwitch.vue'
 
+import { useRoute } from "vue-router";
+const route = useRoute();
 </script>
 
 <template>

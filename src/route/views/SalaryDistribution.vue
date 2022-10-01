@@ -12,7 +12,7 @@ const props = defineProps({
 
 const store = useStore();
 const route = useRoute();
-const areas = store.state.data[route.params.city][props.date].areas;
+const areas = store.state.data[store.state.currentCity][props.date].areas;
 
 let mainData = Array(30).fill(0)
 Object.values(areas).forEach(item => {
