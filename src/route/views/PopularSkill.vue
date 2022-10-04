@@ -49,4 +49,13 @@ let rankStyle = ref({
 .content {
   overflow: -moz-scrollbars-none;
 }
+
+:deep(.info-name) {
+  text-align: start;
+  font-weight: bold;
+}
+
+:deep(.rank) {
+  margin-right: 4px;
+}
 </style>
