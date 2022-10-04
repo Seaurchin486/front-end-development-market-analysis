@@ -15,12 +15,13 @@ const store = useStore();
 const route = useRoute();
 const areas = store.state.data[store.state.currentCity][props.date].areas;
 
-let mainData = Array(30).fill(0);
+let mainData = Array(31).fill(0);
 Object.values(areas).forEach((item) => {
   Object.entries(item).forEach((inner) => {
     mainData[inner[0]] += inner[1];
   });
 });
+mainData.shift();
 // 一个总表
 const mainOption = ref({
   title: {
@@ -31,7 +32,7 @@ const mainOption = ref({
     },
   },
   tooltip: {
-    trigger: "item",
+    trigger: "axis",
   },
   xAxis: {
     type: "category",
@@ -113,11 +114,14 @@ const mainOption = ref({
 });
 
 // 地区分表 （还要从给的数据中获取并渲染）
+let maxCount = 0
 let areaOptions = Object.keys(areas).map((item) => {
-  let areaData = Array(30).fill(0);
+  let areaData = Array(31).fill(0);
   Object.entries(areas[item]).forEach(([key, value]) => {
     areaData[key] = value;
+    maxCount = Math.max(maxCount, value)
   });
+  areaData.shift();
   return {
     title: {
       text: item,
@@ -127,7 +131,7 @@ let areaOptions = Object.keys(areas).map((item) => {
       },
     },
     tooltip: {
-      trigger: "item",
+      trigger: "axis",
     },
     xAxis: {
       type: "category",
@@ -174,6 +178,7 @@ let areaOptions = Object.keys(areas).map((item) => {
       ],
     },
     yAxis: {
+      // max: maxCount,
       splitLine: {
         lineStyle: {
           type: "dashed",
@@ -205,6 +210,10 @@ let areaOptions = Object.keys(areas).map((item) => {
     ],
   };
 });
+areaOptions = areaOptions.map(item => {
+  item.yAxis.max = maxCount
+  return item
+})
 </script>
     
 <template>
@@ -233,8 +242,8 @@ let areaOptions = Object.keys(areas).map((item) => {
   overflow: -moz-scrollbars-none;
 }
 .area-chart {
-  width: 40vw;
-  height: 500px;
+  width: 50%;
+  height: 450px;
   float: left;
 }
 </style>
