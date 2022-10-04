@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
@@ -22,13 +22,19 @@ let config = {
   rowNum: skills.slice(0, 30).length,
 };
 let rankStyle = ref({
-  width: window.innerWidth * 0.8 + "px",
+  width: window.innerWidth * 0.78 + "px",
   height: 35 * config.rowNum + "px",
 });
+nextTick(()=>{
+  const content = document.getElementById('rank-board')
+  const contentStyle = getComputedStyle(content)
+  rankStyle.value.width = contentStyle.width
+})
+console.log(window)
 </script>
     
 <template>
-  <div class="content">
+  <div id="rank-board" class="content">
     <dv-scroll-ranking-board :config="config" :style="rankStyle" />
   </div>
 </template>
@@ -37,7 +43,7 @@ let rankStyle = ref({
 .content {
   overflow-x: hidden;
   overflow-y: auto;
-  height: 63vh;
+  height: 65vh;
 }
 .content::-webkit-scrollbar {
   width: 0 !important;

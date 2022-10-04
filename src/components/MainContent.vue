@@ -15,7 +15,7 @@ let options = ref(
 </script>
 
 <template>
-  <div>
+  <div style="padding:10px; border: 1px solid transparent">
     <el-select
       v-model="dateValue"
       filterable
