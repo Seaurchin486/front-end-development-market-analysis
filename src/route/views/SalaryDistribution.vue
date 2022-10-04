@@ -229,7 +229,7 @@ areaOptions = areaOptions.map(item => {
 .content {
   overflow-x: hidden;
   overflow-y: auto;
-  height: 63vh;
+  height: 80vh;
 }
 .content::-webkit-scrollbar {
   width: 0 !important;

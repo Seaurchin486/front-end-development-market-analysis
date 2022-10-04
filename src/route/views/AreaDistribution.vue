@@ -32,7 +32,7 @@ let option = {
     min: 0,
     max: maxCount + 50,
     inRange: {
-      color: ["PaleGreen", "yellow", "orangered", "red"],
+      color: ["#45D0FF", "#195078"],
       colorAlpha: [0.68],
     },
   },
@@ -79,7 +79,7 @@ let option = {
 .content {
   overflow-x: hidden;
   overflow-y: auto;
-  height: 63vh;
+  height: 80vh;
 }
 .content::-webkit-scrollbar {
   width: 0 !important;

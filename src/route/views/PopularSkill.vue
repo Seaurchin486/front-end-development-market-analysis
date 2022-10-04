@@ -43,7 +43,7 @@ console.log(window)
 .content {
   overflow-x: hidden;
   overflow-y: auto;
-  height: 65vh;
+  height: 80vh;
 }
 .content::-webkit-scrollbar {
   width: 0 !important;
