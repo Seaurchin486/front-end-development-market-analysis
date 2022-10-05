@@ -1,35 +1,61 @@
 <script setup>
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-const route = useRoute()
+import { ref, nextTick } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
+function check(event) {
+  const buttons = document.querySelectorAll(".left-drop");
+
+  Array.from(buttons).map((item) => {
+    item.classList.remove("checked");
+  });
+  console.log(event.currentTarget.childNodes)
+  event.currentTarget.childNodes[0].classList.add("checked");
+}
 </script>
   
 <template>
-  <div class="drop">
-    <router-link :to="`/SalaryDistribution`"><p>薪资分布</p></router-link>
-  </div>
-  <div class="drop">
-    <router-link :to="`/AreaDistribution`"><p>地区分布</p></router-link>
-  </div>
-  <div class="drop">
-    <router-link :to="`/PopularSkill`"><p>热门技能</p></router-link>
-  </div>
+  <router-link :to="`/SalaryDistribution`" @click="check">
+    <div class="left-drop checked">
+      <p>薪资分布</p>
+    </div>
+  </router-link>
+  <router-link :to="`/AreaDistribution`" @click="check">
+    <div class="left-drop">
+      <p>地区分布</p>
+    </div>
+  </router-link>
+  <router-link :to="`/PopularSkill`" @click="check">
+    <div class="left-drop">
+      <p>热门技能</p>
+    </div>
+  </router-link>
 </template>
   
 <style scoped>
-  .drop {
-    position: relative;
-    border-radius: 5%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-shadow: -1px -1px 3px blue;
-    filter: drop-shadow(2px 2px 5px blue);
-    box-shadow:
-        inset 4px 4px 8px rgba(0, 0, 0, 0.05),
-        7px 12px 8px rgba(0, 0, 0, 0.05),
-        7px 10px 20px rgba(0, 0, 0, 0.05),
-        inset -4px -4px 15px rgba(138, 43, 226, 0.9);
+.left-drop {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3px;
+
+  width: 80%;
+  text-shadow: -1px -1px 3px rgb(105, 105, 219);
+  --button-bg: #58a5;
+  background: linear-gradient(-135deg, transparent 5%, var(--button-bg) 0),
+    linear-gradient(-45deg, transparent 5%, var(--button-bg) 0) bottom;
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+}
+
+.left-drop:hover {
+  width: 100%;
+}
+
+.checked {
+  width: 100%;
+  font-size: large;
+  font-weight: hold;
 }
 </style>
   

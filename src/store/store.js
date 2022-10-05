@@ -29,7 +29,7 @@ export default createStore({
     //     }
     //   }
     // }
-    currentCity: 'hangzhou'
+    currentCity: 'hefei'
   },
   mutations: { // 定义状态突变方法 commit
     changeCity(state, value) {

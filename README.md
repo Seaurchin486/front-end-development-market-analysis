@@ -31,7 +31,6 @@ Echarts 地图控件
 Element-Plus
 
 # 目前任务
-3. 添加装饰
 5. 优化侧边栏交互
 
 项目review
