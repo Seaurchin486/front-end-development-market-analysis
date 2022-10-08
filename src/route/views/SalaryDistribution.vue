@@ -114,12 +114,12 @@ const mainOption = ref({
 });
 
 // 地区分表 （还要从给的数据中获取并渲染）
-let maxCount = 0
+let maxCount = 0;
 let areaOptions = Object.keys(areas).map((item) => {
   let areaData = Array(31).fill(0);
   Object.entries(areas[item]).forEach(([key, value]) => {
     areaData[key] = value;
-    maxCount = Math.max(maxCount, value)
+    maxCount = Math.max(maxCount, value);
   });
   areaData.shift();
   return {
@@ -210,10 +210,10 @@ let areaOptions = Object.keys(areas).map((item) => {
     ],
   };
 });
-areaOptions = areaOptions.map(item => {
-  item.yAxis.max = maxCount
-  return item
-})
+areaOptions = areaOptions.map((item) => {
+  item.yAxis.max = maxCount;
+  return item;
+});
 </script>
     
 <template>
@@ -222,6 +222,8 @@ areaOptions = areaOptions.map(item => {
     <div class="area-chart" v-for="key in areaOptions.length" :key="key">
       <v-echart :option="areaOptions[key - 1]" />
     </div>
+    <div class="roll-tip"></div>
+    <!-- 不知道为什么放到外面就会出现移位 -->
   </div>
 </template>
     
@@ -245,5 +247,28 @@ areaOptions = areaOptions.map(item => {
   width: 50%;
   height: 450px;
   float: left;
+}
+
+.roll-tip {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  translate: -50% 0;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border-right: solid #858dd9 10px;
+  border-bottom: solid #858dd9 10px;
+  scale: 100% 50%;
+  transform: rotate(45deg);
+  animation: show 1.5s infinite alternate;
+}
+@keyframes show {
+  from {
+    opacity: 0.2;
+  };
+  to {
+    opacity: 0.6;
+  }
 }
 </style>

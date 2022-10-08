@@ -35,4 +35,6 @@ Element-Plus
 
 项目review
 考虑是否进一步优化
+薪资子表排序
+地图页面显示技能云
 利用echarts的时间线
