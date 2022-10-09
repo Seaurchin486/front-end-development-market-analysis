@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onUpdated, ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -12,6 +12,14 @@ let options = ref(
     };
   })
 );
+onUpdated(()=>{
+  options.value = Object.keys(store.state.data[store.state.currentCity]).map((item) => {
+    return {
+      value: item,
+      label: item,
+    };
+  })
+})
 </script>
 
 <template>
