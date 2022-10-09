@@ -4,7 +4,6 @@ const dataSources = import.meta.glob('/src/assets/dataSource/*/*.js', { eager: t
 let handleData = Object.keys(dataSources).reduce((pre, key) => {
   // '/src/assets/dataSource/hangzhou/20220919.js'
   let propertyNames = key.slice(23).match(/\w+/g)
-  // console.log(propertyNames[0], propertyNames[1])
 
   // 生成对应对象
   if (!pre.hasOwnProperty(propertyNames[0])) {

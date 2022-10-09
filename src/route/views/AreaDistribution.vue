@@ -8,9 +8,21 @@ const props = defineProps({
     require: true,
   },
 });
+
+const emit = defineEmits([
+  'update:date'
+])
 const store = useStore();
 const route = useRoute();
-const areas = store.state.data[store.state.currentCity][props.date].areas;
+
+const datekeys = Object.keys(store.state.data[store.state.currentCity])
+let areas = null
+if (datekeys.includes(props.date)) {
+  areas = store.state.data[store.state.currentCity][props.date].areas
+} else {
+  emit('update:date', datekeys[0])
+  areas = store.state.data[store.state.currentCity][datekeys[0]].areas
+}
 // 根据地区计算总的
 let maxCount = 100;
 let areaDatas = Object.entries(areas).map((item) => {
@@ -55,7 +67,7 @@ let option = {
       itemStyle: {
         borderWidth: 0.3, //边际线大小
         borderColor: "#1737AD", //边界线颜色
-        areaColor: "#e0f3f8", //默认区域颜色
+        areaColor: "#45D0FF.68", //默认区域颜色
       },
       emphasis: {
         itemStyle: {

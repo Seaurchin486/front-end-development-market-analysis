@@ -32,7 +32,7 @@ let options = ref(
     </el-select>
     <router-view
       :key="store.state.currentCity + dateValue"
-      :date="dateValue"
+      v-model:date="dateValue"
       style="clear: both"
     ></router-view>
   </div>

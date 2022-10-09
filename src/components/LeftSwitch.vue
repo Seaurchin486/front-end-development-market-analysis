@@ -1,31 +1,44 @@
 <script setup>
-import { ref, nextTick } from "vue";
-import { useRoute } from "vue-router";
-const route = useRoute();
+import { onMounted } from 'vue'
+onMounted(() => {
+  switch (window.location.hash) {
+    case '#/SalaryDistribution': {
+      document.getElementsByClassName('salary-distribution')[0].classList.add('checked')
+      break
+    }
+    case '#/AreaDistribution': {
+      document.getElementsByClassName('area-distribution')[0].classList.add('checked')
+      break
+    }
+    case '#/PopularSkill': {
+      document.getElementsByClassName('popular-skill')[0].classList.add('checked')
+      break
+    }
+  }
+})
 function check(event) {
   const buttons = document.querySelectorAll(".left-drop");
 
   Array.from(buttons).map((item) => {
     item.classList.remove("checked");
   });
-  console.log(event.currentTarget.childNodes)
   event.currentTarget.childNodes[0].classList.add("checked");
 }
 </script>
   
 <template>
   <router-link :to="`/SalaryDistribution`" @click="check">
-    <div class="left-drop checked">
+    <div class="left-drop salary-distribution">
       <p>薪资分布</p>
     </div>
   </router-link>
   <router-link :to="`/AreaDistribution`" @click="check">
-    <div class="left-drop">
+    <div class="left-drop area-distribution">
       <p>地区分布</p>
     </div>
   </router-link>
   <router-link :to="`/PopularSkill`" @click="check">
-    <div class="left-drop">
+    <div class="left-drop popular-skill">
       <p>热门技能</p>
     </div>
   </router-link>

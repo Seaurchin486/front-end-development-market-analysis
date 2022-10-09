@@ -9,9 +9,22 @@ const props = defineProps({
     require: true
   }
 })
+
+const emit = defineEmits([
+  'update:date'
+])
+
 const store = useStore();
 
-let skills = store.state.data[store.state.currentCity][props.date].skills;
+const datekeys = Object.keys(store.state.data[store.state.currentCity])
+let skills = null
+if (datekeys.includes(props.date)) {
+  skills = store.state.data[store.state.currentCity][props.date].skills
+} else {
+  emit('update:date', datekeys[0])
+  skills = store.state.data[store.state.currentCity][datekeys[0]].skills
+}
+
 let config = {
   data: skills.slice(0, 30).map((item) => {
     return {
@@ -30,7 +43,6 @@ nextTick(()=>{
   const contentStyle = getComputedStyle(content)
   rankStyle.value.width = contentStyle.width
 })
-console.log(window)
 </script>
     
 <template>

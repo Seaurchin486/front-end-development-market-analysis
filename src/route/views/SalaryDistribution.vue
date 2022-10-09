@@ -11,9 +11,21 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits([
+  'update:date'
+])
+
 const store = useStore();
 const route = useRoute();
-const areas = store.state.data[store.state.currentCity][props.date].areas;
+const datekeys = Object.keys(store.state.data[store.state.currentCity])
+let areas = null
+if (datekeys.includes(props.date)) {
+  areas = store.state.data[store.state.currentCity][props.date].areas
+} else {
+  emit('update:date', datekeys[0])
+  areas = store.state.data[store.state.currentCity][datekeys[0]].areas
+}
+
 
 let mainData = Array(31).fill(0);
 Object.values(areas).forEach((item) => {
