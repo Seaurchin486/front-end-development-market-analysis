@@ -6,6 +6,10 @@ onMounted(() => {
       document.getElementsByClassName('salary-distribution')[0].classList.add('checked')
       break
     }
+    case '#/': {
+      document.getElementsByClassName('salary-distribution')[0].classList.add('checked')
+      break
+    }
     case '#/AreaDistribution': {
       document.getElementsByClassName('area-distribution')[0].classList.add('checked')
       break
